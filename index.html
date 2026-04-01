@@ -138,6 +138,26 @@
   }
   .field input:focus { border-color: var(--green-light); background: #fff; }
 
+  .field select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.15s;
+    outline: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+  .field select:focus { border-color: var(--green-light); background-color: #fff; }
+  .field select:disabled { opacity: 0.5; cursor: not-allowed; }
+
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   /* ─── radio options ───────────────────── */
@@ -384,12 +404,29 @@
       <div class="field"><label>Email <em>*</em></label><input type="email" id="email" placeholder="you@email.com"></div>
       <div class="field"><label>Phone <em>*</em></label><input type="tel" id="phone" placeholder="+1 (___) ___-____"></div>
     </div>
+    <div class="field"><label>WhatsApp no# <em>*</em></label><input type="tel" id="whatsapp" placeholder="+1 (___) ___-____" style="max-width:280px;"><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">A WhatsApp group will be created for Reunion communication</div></div>
+    <div class="field-row">
+      <div class="field">
+        <label>Country <em>*</em></label>
+        <select id="country" onchange="updateStates()">
+          <option value="">— Select country —</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>State / Province <em>*</em></label>
+        <select id="state" disabled>
+          <option value="">— Select country first —</option>
+        </select>
+      </div>
+    </div>
   </div>
 
   <!-- Cadet info -->
   <div class="card">
     <div class="card-title">Cadet info</div>
-    <div class="field"><label>Cadet name <em>*</em></label><input type="text" id="cadetname" placeholder="Name as on record"></div>
+    <div class="field"><label>CadetName <em>*</em></label><input type="text" id="cadetname" placeholder="One word e.g. RAHMAN"></div>
     <div class="field-row">
       <div class="field"><label>Cadet no# <em>*</em></label><input type="text" id="cadetno" placeholder="e.g. 1234"></div>
       <div class="field"><label>Batch no# <em>*</em></label><input type="text" id="batchno" placeholder="e.g. 42"></div>
@@ -429,22 +466,31 @@
     </div>
 
     <div class="field">
-      <label>Children (6+ yrs) <em>*</em></label>
+      <label>Children (3+) or Guest <em>*</em></label>
       <div class="options" id="grp-c6">
-        <div class="opt" data-name="c6" data-val="0" data-lbl=""><input type="radio" name="c6" value="0"><div class="radio-dot"></div><span class="opt-text">No children (6+)</span></div>
-        <div class="opt" data-name="c6" data-val="100" data-lbl="1 child (6+)"><input type="radio" name="c6" value="100"><div class="radio-dot"></div><span class="opt-text">1 child</span><span class="opt-price">$100</span></div>
-        <div class="opt" data-name="c6" data-val="200" data-lbl="2 children (6+)"><input type="radio" name="c6" value="200"><div class="radio-dot"></div><span class="opt-text">2 children</span><span class="opt-price">$200</span></div>
-        <div class="opt" data-name="c6" data-val="300" data-lbl="3 children (6+)"><input type="radio" name="c6" value="300"><div class="radio-dot"></div><span class="opt-text">3 children</span><span class="opt-price">$300</span></div>
-        <div class="opt" data-name="c6" data-val="400" data-lbl="4 children (6+)"><input type="radio" name="c6" value="400"><div class="radio-dot"></div><span class="opt-text">4 children</span><span class="opt-price">$400</span></div>
+        <div class="opt" data-name="c6" data-val="0" data-lbl=""><input type="radio" name="c6" value="0"><div class="radio-dot"></div><span class="opt-text">None</span></div>
+        <div class="opt" data-name="c6" data-val="100" data-lbl="1 child/guest"><input type="radio" name="c6" value="100"><div class="radio-dot"></div><span class="opt-text">1 child / guest</span><span class="opt-price">$100</span></div>
+        <div class="opt" data-name="c6" data-val="200" data-lbl="2 children/guests"><input type="radio" name="c6" value="200"><div class="radio-dot"></div><span class="opt-text">2 children / guests</span><span class="opt-price">$200</span></div>
+        <div class="opt" data-name="c6" data-val="300" data-lbl="3 children/guests"><input type="radio" name="c6" value="300"><div class="radio-dot"></div><span class="opt-text">3 children / guests</span><span class="opt-price">$300</span></div>
+        <div class="opt" data-name="c6" data-val="400" data-lbl="4 children/guests"><input type="radio" name="c6" value="400"><div class="radio-dot"></div><span class="opt-text">4 children / guests</span><span class="opt-price">$400</span></div>
       </div>
     </div>
 
     <div class="field">
-      <label>Children (under 6 yrs) <em>*</em></label>
+      <label>Children (under 3 yrs) <em>*</em></label>
       <div class="options" id="grp-cu6">
         <div class="opt" data-name="cu6" data-val="None"><input type="radio" name="cu6" value="None"><div class="radio-dot"></div><span class="opt-text">None</span><span class="opt-price free">Free</span></div>
         <div class="opt" data-name="cu6" data-val="1 child"><input type="radio" name="cu6" value="1 child"><div class="radio-dot"></div><span class="opt-text">1 child</span><span class="opt-price free">Free</span></div>
         <div class="opt" data-name="cu6" data-val="2 children"><input type="radio" name="cu6" value="2 children"><div class="radio-dot"></div><span class="opt-text">2 children</span><span class="opt-price free">Free</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>House <em>*</em></label>
+      <div class="options" id="grp-house">
+        <div class="opt" data-name="house" data-val="FH"><input type="radio" name="house" value="FH"><div class="radio-dot"></div><span class="opt-text"><span class="house-dot" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1565C0;margin-right:7px;vertical-align:middle;"></span>FH</span></div>
+        <div class="opt" data-name="house" data-val="SH"><input type="radio" name="house" value="SH"><div class="radio-dot"></div><span class="opt-text"><span class="house-dot" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#c0392b;margin-right:7px;vertical-align:middle;"></span>SH</span></div>
+        <div class="opt" data-name="house" data-val="NH"><input type="radio" name="house" value="NH"><div class="radio-dot"></div><span class="opt-text"><span class="house-dot" style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#27ae60;margin-right:7px;vertical-align:middle;"></span>NH</span></div>
       </div>
     </div>
   </div>
@@ -474,8 +520,16 @@
       </div>
     </div>
     <div class="field">
-      <label>Additional donation (optional)</label>
+      <label>Additional donation</label>
       <div class="donation-wrap"><span>$</span><input type="number" id="donation" placeholder="0" min="0" step="1"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Remarks &amp; suggestions</div>
+    <div class="field">
+      <label>Any remarks or suggestions?</label>
+      <textarea id="remarks" placeholder="Share any thoughts, dietary requirements, or suggestions for the reunion…" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--cream);min-height:90px;resize:vertical;outline:none;transition:border-color 0.15s;" onfocus="this.style.borderColor='var(--green-light)';this.style.background='#fff'" onblur="this.style.borderColor='';this.style.background='var(--cream)'"></textarea>
     </div>
   </div>
 
@@ -506,12 +560,12 @@
     <div class="zelle-box">
       <div class="zelle-label">Send via Zelle to</div>
       <div class="zelle-val">917-204-0315</div>
-      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Sadat Hossain</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Mohammad Sadat Hossain</div>
     </div>
     <ul class="payment-steps">
       <li>Open your banking app and go to Zelle.</li>
-      <li>Send <strong id="pay-amount" style="color:var(--green)"></strong> to <strong style="color:var(--green)">917-204-0315</strong> (Sadat Hossain).</li>
-      <li>Use your full name as the memo/note.</li>
+      <li>Send <strong id="pay-amount" style="color:var(--green)"></strong> to <strong style="color:var(--green)">917-204-0315</strong> (Mohammad Sadat Hossain).</li>
+      <li>In the Zelle memo, write your <strong>name and batch number</strong> (e.g. Rahman, Batch 42).</li>
       <li>Keep a screenshot of your payment as confirmation.</li>
     </ul>
     <div class="hotel-note" id="hotel-note" style="display:none">
@@ -528,6 +582,39 @@
 </div>
 
 <script>
+  // ── state data ─────────────────────────────────────────
+  const US_STATES = [
+    'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
+    'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa',
+    'Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan',
+    'Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada',
+    'New Hampshire','New Jersey','New Mexico','New York','North Carolina',
+    'North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island',
+    'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont',
+    'Virginia','Washington','West Virginia','Wisconsin','Wyoming'
+  ];
+  const CA_PROVINCES = [
+    'Alberta','British Columbia','Manitoba','New Brunswick',
+    'Newfoundland and Labrador','Northwest Territories','Nova Scotia',
+    'Nunavut','Ontario','Prince Edward Island','Quebec','Saskatchewan','Yukon'
+  ];
+
+  function updateStates() {
+    const country = document.getElementById('country').value;
+    const stateEl = document.getElementById('state');
+    stateEl.innerHTML = '';
+    if (!country) {
+      stateEl.innerHTML = '<option value="">— Select country first —</option>';
+      stateEl.disabled = true;
+      return;
+    }
+    const list = country === 'USA' ? US_STATES : CA_PROVINCES;
+    const placeholder = country === 'USA' ? '— Select state —' : '— Select province —';
+    stateEl.innerHTML = `<option value="">${placeholder}</option>` +
+      list.map(s => `<option value="${s}">${s}</option>`).join('');
+    stateEl.disabled = false;
+  }
+
   // ── radio interaction ──────────────────────────────────
   document.querySelectorAll('.opt').forEach(opt => {
     opt.addEventListener('click', () => {
@@ -564,14 +651,17 @@
   function validate() {
     const fields = [
       ['fullname','Full name'], ['email','Email'], ['phone','Phone'],
-      ['cadetname','Cadet name'], ['cadetno','Cadet no#'], ['batchno','Batch no#']
+      ['whatsapp','WhatsApp no#'],
+      ['cadetname','CadetName'], ['cadetno','Cadet no#'], ['batchno','Batch no#']
     ];
     for (const [id, lbl] of fields) {
       if (!document.getElementById(id).value.trim()) return `Please enter your ${lbl}.`;
     }
     const email = document.getElementById('email').value;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
-    for (const name of ['cadet','spouse','c6','cu6','friday','picnic','hotel']) {
+    if (!document.getElementById('country').value) return 'Please select your country.';
+    if (!document.getElementById('state').value) return 'Please select your state / province.';
+    for (const name of ['cadet','spouse','c6','cu6','house','friday','picnic','hotel']) {
       if (!getVal(name)) return 'Please answer all required questions.';
     }
     return null;
@@ -601,17 +691,22 @@
       fullName:   document.getElementById('fullname').value.trim(),
       email:      document.getElementById('email').value.trim(),
       phone:      document.getElementById('phone').value.trim(),
+      whatsapp:   document.getElementById('whatsapp').value.trim(),
+      country:    document.getElementById('country').value,
+      state:      document.getElementById('state').value,
       cadetName:  document.getElementById('cadetname').value.trim(),
       cadetNo:    document.getElementById('cadetno').value.trim(),
       batchNo:    document.getElementById('batchno').value.trim(),
       cadet:      cadet ? 'Yes — $200' : 'No',
       spouse:     spouse ? 'Joining — $100' : 'Not joining',
-      children6:  getVal('c6') === '0' ? 'None' : document.querySelector('.opt.active[data-name="c6"] .opt-text').textContent + ' — $' + c6,
+      children3:  getVal('c6') === '0' ? 'None' : document.querySelector('.opt.active[data-name="c6"] .opt-text').textContent.trim() + ' — $' + c6,
       childrenU6: getVal('cu6'),
+      house:      getVal('house'),
       friday:     getVal('friday'),
       picnic:     getVal('picnic'),
       hotel:      getVal('hotel'),
       donation:   donation ? '$' + donation : '—',
+      remarks:    document.getElementById('remarks').value.trim() || '—',
       total:      '$' + total
     };
 
@@ -644,7 +739,7 @@
     const parts = [];
     if (cadet)    parts.push('Cadet registration: $200');
     if (spouse)   parts.push('Spouse: $100');
-    if (c6)       parts.push('Children (6+): $' + c6);
+    if (c6)       parts.push('Children (3+) / Guest: $' + c6);
     if (donation) parts.push('Additional donation: $' + donation);
     document.getElementById('conf-breakdown').innerHTML = parts.join('<br>');
 
@@ -652,13 +747,17 @@
 
     const rows = [
       ['Name', data.fullName], ['Email', data.email], ['Phone', data.phone],
-      ['Cadet name', data.cadetName], ['Cadet no#', data.cadetNo], ['Batch no#', data.batchNo],
+      ['WhatsApp', data.whatsapp],
+      ['Country', data.country], ['State / Province', data.state],
+      ['CadetName', data.cadetName], ['Cadet no#', data.cadetNo], ['Batch no#', data.batchNo],
       ['Joining', data.cadet], ['Spouse', data.spouse],
-      ['Children (6+)', data.children6], ['Children (under 6)', data.childrenU6],
+      ['Children (3+) / Guest', data.children3], ['Children (under 3)', data.childrenU6],
+      ['House', data.house],
       ['Friday dinner', data.friday], ['Sunday picnic', data.picnic],
       ['Staying at Marriott', data.hotel]
     ];
     if (donation) rows.push(['Donation', '$' + donation]);
+    if (data.remarks !== '—') rows.push(['Remarks', data.remarks]);
 
     document.getElementById('summary-table').innerHTML = rows
       .map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
