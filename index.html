@@ -615,16 +615,16 @@
     };
 
     // ── post to Google Apps Script ──────────────────────
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKb0rcpRQMUTRbVvUAbzlU0DCwUycpEfzJksvT0ZMEanjV21AmHz6xzIUjT8EvGPyNwg/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdglGB_FEV3lghy-553M1RC_-RAxLh59LmEya-S_rfoOzX4Ti0iwJsuXEpK2Zp_lB7Nw/exec';
 
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(data)
       });
-    } catch(e) { /* sheet save failed silently */ }
+    } catch(e) { console.error('Sheet save failed:', e); }
 
     showConfirmation(data, total, c6, cadet, spouse, donation);
   }
