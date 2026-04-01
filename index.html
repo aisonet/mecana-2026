@@ -618,14 +618,12 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKb0rcpRQMUTRbVvUAbzlU0DCwUycpEfzJksvT0ZMEanjV21AmHz6xzIUjT8EvGPyNwg/exec';
 
     try {
-      if (SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxKb0rcpRQMUTRbVvUAbzlU0DCwUycpEfzJksvT0ZMEanjV21AmHz6xzIUjT8EvGPyNwg/exec') {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-      }
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
     } catch(e) { /* sheet save failed silently */ }
 
     showConfirmation(data, total, c6, cadet, spouse, donation);
