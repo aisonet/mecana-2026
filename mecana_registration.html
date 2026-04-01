@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MECANA Reunion 2026 — Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a3a2a;
+    --green-mid: #2d5c42;
+    --green-light: #4a8c64;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #faf8f3;
+    --cream-dark: #f0ece0;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --border: rgba(26,58,42,0.15);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ─── header ─────────────────────────── */
+  .site-header {
+    background: var(--green);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(201,168,76,0.18) 0%, transparent 70%);
+  }
+  .site-header .badge {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold-light);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: #fff;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .site-header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  /* ─── layout ──────────────────────────── */
+  .container { max-width: 680px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  /* ─── total strip ─────────────────────── */
+  .total-strip {
+    background: var(--green);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+    box-shadow: 0 4px 24px rgba(26,58,42,0.2);
+  }
+  .total-strip .label { color: rgba(255,255,255,0.65); font-size: 13px; }
+  .total-strip .amount { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold-light); }
+  .total-strip .breakdown { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 2px; }
+
+  /* ─── card ────────────────────────────── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── fields ──────────────────────────── */
+  .field { margin-bottom: 1.1rem; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+  .field label em { color: #c0392b; font-style: normal; margin-left: 2px; }
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field input[type=number] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .field input:focus { border-color: var(--green-light); background: #fff; }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* ─── radio options ───────────────────── */
+  .options { display: flex; flex-direction: column; gap: 7px; }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--cream);
+  }
+  .opt:hover { border-color: var(--green-light); background: #fff; }
+  .opt.active { border-color: var(--green); background: rgba(26,58,42,0.04); }
+  .opt input[type=radio] { display: none; }
+  .radio-dot {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.15s;
+  }
+  .opt.active .radio-dot { border-color: var(--green); }
+  .opt.active .radio-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: var(--green);
+    border-radius: 50%;
+  }
+  .opt-text { flex: 1; font-size: 14px; }
+  .opt-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green-mid);
+    background: rgba(26,58,42,0.08);
+    padding: 2px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .opt-price.free { color: var(--text-muted); background: var(--cream-dark); }
+
+  /* ─── donation ────────────────────────── */
+  .donation-wrap { display: flex; align-items: center; gap: 0; }
+  .donation-wrap span {
+    background: var(--cream-dark);
+    border: 1px solid var(--border);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .donation-wrap input {
+    border-radius: 0 8px 8px 0 !important;
+    width: 140px !important;
+  }
+
+  /* ─── submit ──────────────────────────── */
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background 0.15s, transform 0.1s;
+    position: relative;
+  }
+  .submit-btn:hover { background: var(--green-mid); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .error-msg {
+    background: #fff0f0;
+    border: 1px solid #ffc5c5;
+    color: #c0392b;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-top: 1rem;
+    display: none;
+  }
+
+  /* ─── confirmation page ───────────────── */
+  #confirm-page { display: none; }
+  .confirm-hero {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: var(--green);
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .confirm-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 130%, rgba(201,168,76,0.2) 0%, transparent 65%);
+  }
+  .checkmark {
+    width: 56px; height: 56px;
+    background: rgba(201,168,76,0.2);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 22px;
+  }
+  .confirm-hero h2 {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+  .confirm-hero p { color: rgba(255,255,255,0.65); font-size: 14px; }
+
+  .confirm-total {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--cream-dark);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+  }
+  .confirm-total .t-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+  .confirm-total .t-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .confirm-total .t-breakdown {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+
+  .payment-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .payment-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+  .zelle-box {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .zelle-box .zelle-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .zelle-box .zelle-val { font-size: 1.1rem; font-weight: 500; color: var(--green); }
+  .payment-steps { list-style: none; counter-reset: steps; }
+  .payment-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .payment-steps li:last-child { border-bottom: none; }
+  .payment-steps li::before {
+    content: counter(steps);
+    background: var(--green);
+    color: #fff;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .summary-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .summary-table tr { border-bottom: 1px solid var(--cream-dark); }
+  .summary-table tr:last-child { border-bottom: none; }
+  .summary-table td { padding: 9px 4px; }
+  .summary-table td:first-child { color: var(--text-muted); width: 45%; }
+  .summary-table td:last-child { font-weight: 400; color: var(--text); }
+
+  .hotel-note {
+    background: rgba(26,58,42,0.06);
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--green-mid);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="badge">October 9 – 11, 2026</div>
+  <h1>MECANA Reunion Registration</h1>
+  <p>New York LaGuardia Airport Marriott · Queens, NY</p>
+</div>
+
+<!-- ═══ FORM PAGE ═══════════════════════════════════ -->
+<div id="form-page">
+<div class="container">
+
+  <div class="total-strip">
+    <div>
+      <div class="label">Total due</div>
+      <div class="breakdown" id="strip-breakdown">Fill in your selections below</div>
+    </div>
+    <div class="amount" id="strip-total">$0</div>
+  </div>
+
+  <!-- Personal info -->
+  <div class="card">
+    <div class="card-title">Personal info</div>
+    <div class="field"><label>Full name <em>*</em></label><input type="text" id="fullname" placeholder="Your full name"></div>
+    <div class="field-row">
+      <div class="field"><label>Email <em>*</em></label><input type="email" id="email" placeholder="you@email.com"></div>
+      <div class="field"><label>Phone <em>*</em></label><input type="tel" id="phone" placeholder="+1 (___) ___-____"></div>
+    </div>
+  </div>
+
+  <!-- Cadet info -->
+  <div class="card">
+    <div class="card-title">Cadet info</div>
+    <div class="field"><label>Cadet name <em>*</em></label><input type="text" id="cadetname" placeholder="Name as on record"></div>
+    <div class="field-row">
+      <div class="field"><label>Cadet no# <em>*</em></label><input type="text" id="cadetno" placeholder="e.g. 1234"></div>
+      <div class="field"><label>Batch no# <em>*</em></label><input type="text" id="batchno" placeholder="e.g. 42"></div>
+    </div>
+  </div>
+
+  <!-- Registration -->
+  <div class="card">
+    <div class="card-title">Registration</div>
+
+    <div class="field">
+      <label>Are you joining? <em>*</em></label>
+      <div class="options" id="grp-cadet">
+        <div class="opt" data-name="cadet" data-val="200" data-lbl="Cadet joining">
+          <input type="radio" name="cadet" value="200"><div class="radio-dot"></div>
+          <span class="opt-text">Yes, I am joining</span><span class="opt-price">$200</span>
+        </div>
+        <div class="opt" data-name="cadet" data-val="0" data-lbl="">
+          <input type="radio" name="cadet" value="0"><div class="radio-dot"></div>
+          <span class="opt-text">No</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Spouse <em>*</em></label>
+      <div class="options" id="grp-spouse">
+        <div class="opt" data-name="spouse" data-val="0" data-lbl="">
+          <input type="radio" name="spouse" value="0"><div class="radio-dot"></div>
+          <span class="opt-text">Not joining with spouse</span>
+        </div>
+        <div class="opt" data-name="spouse" data-val="100" data-lbl="Spouse">
+          <input type="radio" name="spouse" value="100"><div class="radio-dot"></div>
+          <span class="opt-text">Joining with spouse</span><span class="opt-price">$100</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Children (6+ yrs) <em>*</em></label>
+      <div class="options" id="grp-c6">
+        <div class="opt" data-name="c6" data-val="0" data-lbl=""><input type="radio" name="c6" value="0"><div class="radio-dot"></div><span class="opt-text">No children (6+)</span></div>
+        <div class="opt" data-name="c6" data-val="100" data-lbl="1 child (6+)"><input type="radio" name="c6" value="100"><div class="radio-dot"></div><span class="opt-text">1 child</span><span class="opt-price">$100</span></div>
+        <div class="opt" data-name="c6" data-val="200" data-lbl="2 children (6+)"><input type="radio" name="c6" value="200"><div class="radio-dot"></div><span class="opt-text">2 children</span><span class="opt-price">$200</span></div>
+        <div class="opt" data-name="c6" data-val="300" data-lbl="3 children (6+)"><input type="radio" name="c6" value="300"><div class="radio-dot"></div><span class="opt-text">3 children</span><span class="opt-price">$300</span></div>
+        <div class="opt" data-name="c6" data-val="500" data-lbl="4 children (6+)"><input type="radio" name="c6" value="500"><div class="radio-dot"></div><span class="opt-text">4 children</span><span class="opt-price">$500</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Children (under 6 yrs) <em>*</em></label>
+      <div class="options" id="grp-cu6">
+        <div class="opt" data-name="cu6" data-val="None"><input type="radio" name="cu6" value="None"><div class="radio-dot"></div><span class="opt-text">None</span><span class="opt-price free">Free</span></div>
+        <div class="opt" data-name="cu6" data-val="1 child"><input type="radio" name="cu6" value="1 child"><div class="radio-dot"></div><span class="opt-text">1 child</span><span class="opt-price free">Free</span></div>
+        <div class="opt" data-name="cu6" data-val="2 children"><input type="radio" name="cu6" value="2 children"><div class="radio-dot"></div><span class="opt-text">2 children</span><span class="opt-price free">Free</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events & Stay -->
+  <div class="card">
+    <div class="card-title">Events &amp; stay</div>
+    <div class="field">
+      <label>Friday night dinner <em>*</em></label>
+      <div class="options">
+        <div class="opt" data-name="friday" data-val="Yes"><input type="radio" name="friday" value="Yes"><div class="radio-dot"></div><span class="opt-text">Yes</span></div>
+        <div class="opt" data-name="friday" data-val="No"><input type="radio" name="friday" value="No"><div class="radio-dot"></div><span class="opt-text">No</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Sunday picnic <em>*</em></label>
+      <div class="options">
+        <div class="opt" data-name="picnic" data-val="Yes"><input type="radio" name="picnic" value="Yes"><div class="radio-dot"></div><span class="opt-text">Yes</span></div>
+        <div class="opt" data-name="picnic" data-val="No"><input type="radio" name="picnic" value="No"><div class="radio-dot"></div><span class="opt-text">No</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Staying at Marriott? <em>*</em></label>
+      <div class="options">
+        <div class="opt" data-name="hotel" data-val="Yes"><input type="radio" name="hotel" value="Yes"><div class="radio-dot"></div><span class="opt-text">Yes — $219/night (book separately)</span></div>
+        <div class="opt" data-name="hotel" data-val="No"><input type="radio" name="hotel" value="No"><div class="radio-dot"></div><span class="opt-text">No</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Additional donation (optional)</label>
+      <div class="donation-wrap"><span>$</span><input type="number" id="donation" placeholder="0" min="0" step="1"></div>
+    </div>
+  </div>
+
+  <div class="error-msg" id="err-msg"></div>
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()">Complete Registration</button>
+
+</div>
+</div>
+
+<!-- ═══ CONFIRMATION PAGE ════════════════════════════ -->
+<div id="confirm-page">
+<div class="container">
+
+  <div class="confirm-hero">
+    <div class="checkmark">✓</div>
+    <h2>Registration Received!</h2>
+    <p id="conf-name-msg">Thank you for registering for MECANA Reunion 2026.</p>
+  </div>
+
+  <div class="confirm-total">
+    <div class="t-label">Your total registration fee</div>
+    <div class="t-amount" id="conf-total">$0</div>
+    <div class="t-breakdown" id="conf-breakdown"></div>
+  </div>
+
+  <div class="payment-card">
+    <h3>How to Pay</h3>
+    <div class="zelle-box">
+      <div class="zelle-label">Send via Zelle to</div>
+      <div class="zelle-val">917-204-0315</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Sadat Hossain</div>
+    </div>
+    <ul class="payment-steps">
+      <li>Open your banking app and go to Zelle.</li>
+      <li>Send <strong id="pay-amount" style="color:var(--green)"></strong> to <strong style="color:var(--green)">917-204-0315</strong> (Sadat Hossain).</li>
+      <li>Use your full name as the memo/note.</li>
+      <li>Keep a screenshot of your payment as confirmation.</li>
+    </ul>
+    <div class="hotel-note" id="hotel-note" style="display:none">
+      If you are staying at the Marriott, please book your room separately at <strong>marriott.com</strong> or call <strong>1-888-236-2427</strong> and mention <em>MECANA</em> to receive the group rate of $219/night.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Your registration summary</div>
+    <table class="summary-table" id="summary-table"></table>
+  </div>
+
+</div>
+</div>
+
+<script>
+  // ── radio interaction ──────────────────────────────────
+  document.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const name = opt.dataset.name;
+      document.querySelectorAll(`.opt[data-name="${name}"]`).forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      opt.querySelector('input[type=radio]').checked = true;
+      updateTotal();
+    });
+  });
+  document.getElementById('donation').addEventListener('input', updateTotal);
+
+  // ── total calculation ──────────────────────────────────
+  function getVal(name) {
+    const el = document.querySelector(`.opt.active[data-name="${name}"]`);
+    return el ? el.dataset.val : null;
+  }
+  function getNum(name) { return parseInt(getVal(name) || '0') || 0; }
+
+  function updateTotal() {
+    const cadet = getNum('cadet'), spouse = getNum('spouse'), c6 = getNum('c6');
+    const donation = parseInt(document.getElementById('donation').value || '0') || 0;
+    const total = cadet + spouse + c6 + donation;
+    document.getElementById('strip-total').textContent = '$' + total;
+    const parts = [];
+    if (cadet) parts.push('Cadet $' + cadet);
+    if (spouse) parts.push('Spouse $' + spouse);
+    if (c6) parts.push('Children $' + c6);
+    if (donation) parts.push('Donation $' + donation);
+    document.getElementById('strip-breakdown').textContent = parts.length ? parts.join(' · ') : 'Fill in your selections below';
+  }
+
+  // ── validation ─────────────────────────────────────────
+  function validate() {
+    const fields = [
+      ['fullname','Full name'], ['email','Email'], ['phone','Phone'],
+      ['cadetname','Cadet name'], ['cadetno','Cadet no#'], ['batchno','Batch no#']
+    ];
+    for (const [id, lbl] of fields) {
+      if (!document.getElementById(id).value.trim()) return `Please enter your ${lbl}.`;
+    }
+    const email = document.getElementById('email').value;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
+    for (const name of ['cadet','spouse','c6','cu6','friday','picnic','hotel']) {
+      if (!getVal(name)) return 'Please answer all required questions.';
+    }
+    return null;
+  }
+
+  // ── submit ─────────────────────────────────────────────
+  async function submitForm() {
+    const err = validate();
+    if (err) {
+      const el = document.getElementById('err-msg');
+      el.textContent = err; el.style.display = 'block';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    document.getElementById('err-msg').style.display = 'none';
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const cadet = getNum('cadet'), spouse = getNum('spouse'), c6 = getNum('c6');
+    const donation = parseInt(document.getElementById('donation').value || '0') || 0;
+    const total = cadet + spouse + c6 + donation;
+
+    const data = {
+      timestamp: new Date().toLocaleString(),
+      fullName:   document.getElementById('fullname').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      cadetName:  document.getElementById('cadetname').value.trim(),
+      cadetNo:    document.getElementById('cadetno').value.trim(),
+      batchNo:    document.getElementById('batchno').value.trim(),
+      cadet:      cadet ? 'Yes — $200' : 'No',
+      spouse:     spouse ? 'Joining — $100' : 'Not joining',
+      children6:  getVal('c6') === '0' ? 'None' : document.querySelector('.opt.active[data-name="c6"] .opt-text').textContent + ' — $' + c6,
+      childrenU6: getVal('cu6'),
+      friday:     getVal('friday'),
+      picnic:     getVal('picnic'),
+      hotel:      getVal('hotel'),
+      donation:   donation ? '$' + donation : '—',
+      total:      '$' + total
+    };
+
+    // ── post to Google Apps Script ──────────────────────
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKb0rcpRQMUTRbVvUAbzlU0DCwUycpEfzJksvT0ZMEanjV21AmHz6xzIUjT8EvGPyNwg/exec';
+
+    try {
+      if (SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxKb0rcpRQMUTRbVvUAbzlU0DCwUycpEfzJksvT0ZMEanjV21AmHz6xzIUjT8EvGPyNwg/exec') {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      }
+    } catch(e) { /* sheet save failed silently */ }
+
+    showConfirmation(data, total, c6, cadet, spouse, donation);
+  }
+
+  // ── confirmation page ──────────────────────────────────
+  function showConfirmation(data, total, c6, cadet, spouse, donation) {
+    document.getElementById('form-page').style.display = 'none';
+    document.getElementById('confirm-page').style.display = 'block';
+    window.scrollTo(0, 0);
+
+    document.getElementById('conf-name-msg').textContent =
+      `Thank you, ${data.fullName}! Your registration is received.`;
+    document.getElementById('conf-total').textContent = '$' + total;
+    document.getElementById('pay-amount').textContent = '$' + total;
+
+    const parts = [];
+    if (cadet)    parts.push('Cadet registration: $200');
+    if (spouse)   parts.push('Spouse: $100');
+    if (c6)       parts.push('Children (6+): $' + c6);
+    if (donation) parts.push('Additional donation: $' + donation);
+    document.getElementById('conf-breakdown').innerHTML = parts.join('<br>');
+
+    if (data.hotel === 'Yes') document.getElementById('hotel-note').style.display = 'block';
+
+    const rows = [
+      ['Name', data.fullName], ['Email', data.email], ['Phone', data.phone],
+      ['Cadet name', data.cadetName], ['Cadet no#', data.cadetNo], ['Batch no#', data.batchNo],
+      ['Joining', data.cadet], ['Spouse', data.spouse],
+      ['Children (6+)', data.children6], ['Children (under 6)', data.childrenU6],
+      ['Friday dinner', data.friday], ['Sunday picnic', data.picnic],
+      ['Staying at Marriott', data.hotel]
+    ];
+    if (donation) rows.push(['Donation', '$' + donation]);
+
+    document.getElementById('summary-table').innerHTML = rows
+      .map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+  }
+</script>
+</body>
+</html>
